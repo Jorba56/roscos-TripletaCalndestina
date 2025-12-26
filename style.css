@@ -3,8 +3,7 @@
    ========================================= */
 * {
     box-sizing: border-box;
-    /* Evitar zoom accidental al tocar rápido en móviles */
-    touch-action: manipulation;
+    touch-action: manipulation; /* Evitar zoom doble toque */
 }
 
 body {
@@ -14,50 +13,29 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Altura completa del dispositivo */
+    height: 100vh;
     width: 100vw;
     margin: 0;
-    overflow: hidden; /* Evitar scroll en el juego */
+    overflow: hidden;
 }
 
 /* =========================================
-   PANTALLA DE LOGIN (PRIVACIDAD)
+   LOGIN SCREEN
    ========================================= */
 #login-screen {
-    position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background: #09152b; 
-    z-index: 9999;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center;
-    transition: opacity 0.5s;
-    padding: 20px;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #09152b; z-index: 9999;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 0.5s; padding: 20px;
 }
-
 #login-screen h2 { font-size: 2rem; margin-bottom: 30px; }
 #login-screen input { 
-    width: 80%; 
-    max-width: 300px;
-    padding: 15px; 
-    text-align: center; 
-    border-radius: 10px;
-    border: none;
-    font-size: 1.2rem; /* 16px+ evita zoom en iPhone */
+    width: 80%; max-width: 300px; padding: 15px; text-align: center; 
+    border-radius: 10px; border: none; font-size: 1.2rem;
 }
 #login-screen button {
-    margin-top: 20px; 
-    padding: 12px 40px; 
-    font-size: 1.2rem; 
-    background: #28a745; 
-    color: white; 
-    border: none; 
-    border-radius: 10px; 
-    cursor: pointer;
+    margin-top: 20px; padding: 12px 40px; font-size: 1.2rem; 
+    background: #28a745; color: white; border: none; border-radius: 10px; cursor: pointer;
 }
 #login-error { color: #ff4444; display: none; margin-top: 15px; font-weight: bold; }
 
@@ -65,175 +43,75 @@ body {
    MENÚ PRINCIPAL
    ========================================= */
 #main-menu {
-    text-align: center;
-    width: 90%;
-    max-width: 500px;
-    animation: fadeIn 0.5s;
+    text-align: center; width: 90%; max-width: 500px; animation: fadeIn 0.5s;
 }
-
 .menu-buttons {
-    display: flex;
-    gap: 20px;
-    margin-top: 30px;
-    justify-content: center;
-    flex-wrap: wrap; /* Permitir que bajen si no caben */
+    display: flex; gap: 20px; margin-top: 30px; justify-content: center; flex-wrap: wrap;
 }
-
 .menu-btn {
-    padding: 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 150px; /* Tamaño fijo para botones */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    padding: 20px; font-size: 1.2rem; border: none; border-radius: 15px; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column;
+    align-items: center; width: 150px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-
 .menu-btn:active { transform: scale(0.95); }
 .rosco-style { background: linear-gradient(145deg, #0033a0, #2b5cb3); color: white; border: 2px solid #ffcc00; }
 .logic-style { background: linear-gradient(145deg, #111, #333); color: #00ffcc; border: 2px solid #00ffcc; }
 .icon { font-size: 2.5rem; margin-bottom: 10px; }
 .record-info { margin-top: 30px; color: #aaa; font-size: 0.9rem; }
-
-/* =========================================
-   CONTENEDOR GENERAL DE JUEGOS
-   ========================================= */
-.game-container {
-    position: relative;
-    width: 600px;  /* Base desktop */
-    height: 600px; /* Base desktop */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .hidden { display: none !important; }
 
+/* =========================================
+   CONTENEDOR JUEGO
+   ========================================= */
+.game-container {
+    position: relative; width: 600px; height: 600px; 
+    display: flex; justify-content: center; align-items: center;
+}
 .back-btn {
-    position: fixed; /* Fijo para que no se mueva al escalar */
-    top: 15px;
-    left: 15px;
-    background: rgba(0,0,0,0.6);
-    border: 1px solid white;
-    color: white;
-    padding: 8px 15px;
-    cursor: pointer;
-    border-radius: 20px;
-    z-index: 100;
-    font-size: 0.9rem;
+    position: fixed; top: 15px; left: 15px; background: rgba(0,0,0,0.6);
+    border: 1px solid white; color: white; padding: 8px 15px; cursor: pointer;
+    border-radius: 20px; z-index: 100; font-size: 0.9rem;
 }
 
 /* =========================================
-   JUEGO 1: EL ROSCO
+   JUEGO 1: ROSCO
    ========================================= */
 .rosco-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    /* Flex para centrar el panel interior */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative; width: 100%; height: 100%; 
+    display: flex; justify-content: center; align-items: center;
 }
-
-/* El círculo de letras */
 .circle {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    /* Nota: La rotación se maneja en JS o CSS base */
+    list-style: none; padding: 0; margin: 0; position: absolute; 
+    width: 100%; height: 100%;
 }
-
 .letter-item {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 36px; /* Un poco más pequeñas */
-    height: 36px;
-    margin: -18px; /* Centrar (mitad de width) */
-    background: linear-gradient(145deg, #2b5cb3, #0033a0);
-    border-radius: 50%;
-    text-align: center;
-    line-height: 36px; /* Centrar vertical texto */
-    font-weight: bold;
-    font-size: 14px;
-    border: 2px solid white;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    transition: all 0.3s;
+    position: absolute; left: 50%; top: 50%; width: 36px; height: 36px; margin: -18px;
+    background: linear-gradient(145deg, #2b5cb3, #0033a0); border-radius: 50%;
+    text-align: center; line-height: 36px; font-weight: bold; font-size: 14px;
+    border: 2px solid white; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); transition: all 0.3s;
 }
-
 .letter-item.active {
-    background: #ffcc00;
-    color: #000;
-    transform: scale(1.4); /* Resaltar más */
-    z-index: 10;
-    border-color: #000;
-    box-shadow: 0 0 15px #ffcc00;
+    background: #ffcc00; color: #000; transform: scale(1.4); z-index: 10; border-color: #000; box-shadow: 0 0 15px #ffcc00;
 }
-
 .letter-item.correct { background: #28a745; border-color: #1e7e34; }
 .letter-item.wrong { background: #dc3545; border-color: #a71d2a; }
 
-/* Panel Central (Preguntas) */
 .center-panel {
-    position: relative; /* Cambiado de absolute a relative para flujo flex */
-    width: 300px;
-    text-align: center;
-    z-index: 20;
-    /* Fondo semitransparente para leer mejor si pasa por encima de bolas */
-    background: rgba(11, 29, 56, 0.85); 
-    padding: 10px;
-    border-radius: 50%;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    position: relative; width: 300px; height: 300px; text-align: center; z-index: 20;
+    background: rgba(11, 29, 56, 0.85); padding: 10px; border-radius: 50%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
-
-.definition {
-    font-size: 1rem;
-    min-height: 60px;
-    margin-bottom: 10px;
-    line-height: 1.3;
-    padding: 0 10px;
-}
-
-#current-letter-display {
-    font-size: 2.5rem;
-    margin: 5px 0;
-    color: #ffcc00;
-}
-
-/* Inputs del juego */
+.definition { font-size: 1rem; min-height: 60px; margin-bottom: 10px; line-height: 1.3; padding: 0 10px; }
+#current-letter-display { font-size: 2.5rem; margin: 5px 0; color: #ffcc00; }
 input[type="text"] {
-    padding: 12px;
-    font-size: 16px; /* Importante: 16px evita zoom en iOS */
-    width: 90%;
-    border-radius: 20px;
-    border: 2px solid #ccc;
-    text-align: center;
-    margin-bottom: 10px;
+    padding: 12px; font-size: 16px; width: 90%; border-radius: 20px;
+    border: 2px solid #ccc; text-align: center; margin-bottom: 10px;
     background: rgba(255,255,255,0.9);
 }
-
 .controls button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 20px;
-    margin: 5px;
-    font-weight: bold;
-    width: 100px;
+    padding: 10px 20px; font-size: 1rem; border: none; border-radius: 20px;
+    margin: 5px; font-weight: bold; width: 100px;
 }
-
 .btn-start { background: #ffcc00; color: #000; width: 100% !important; margin-top: 10px; }
 .btn-pasa { background: #6c757d; color: white; }
 .btn-check { background: #28a745; color: white; }
@@ -243,123 +121,56 @@ input[type="text"] {
    JUEGO 2: EL 1% (LÓGICA)
    ========================================= */
 .logic-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center; padding: 20px;
 }
-
-.logic-title {
-    color: #00ffcc;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
+.logic-title { color: #00ffcc; text-transform: uppercase; letter-spacing: 2px; font-size: 1.5rem; margin-bottom: 20px; }
 .logic-card {
-    background: #111;
-    border: 2px solid #00ffcc;
-    border-radius: 15px;
-    padding: 20px;
-    width: 100%;
-    max-width: 400px; /* Limite ancho */
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
-    margin-bottom: 20px;
+    background: #111; border: 2px solid #00ffcc; border-radius: 15px; padding: 20px;
+    width: 100%; max-width: 400px; box-shadow: 0 0 20px rgba(0, 255, 204, 0.2); margin-bottom: 20px;
 }
+#riddle-question { font-size: 1.1rem; line-height: 1.5; white-space: pre-line; }
+.logic-controls { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.btn-logic { background: #00ffcc; color: #000; width: 100%; padding: 12px; font-weight: bold; border-radius: 20px; border:none; cursor: pointer;}
+.btn-giveup { background: transparent; border: 1px solid #555; color: #aaa; width: 100%; padding: 10px; margin-top: 5px; border-radius: 20px; cursor: pointer;}
 
-#riddle-question {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    white-space: pre-line;
+/* --- MODAL FEEDBACK --- */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9); display: flex; justify-content: center; align-items: center;
+    z-index: 2000; animation: fadeIn 0.3s;
 }
-
-.logic-controls {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+.modal-content {
+    background: #111; border: 2px solid #00ffcc; padding: 30px; border-radius: 15px;
+    text-align: center; max-width: 90%; width: 400px; box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
 }
-
-.btn-logic { background: #00ffcc; color: #000; width: 100%; padding: 12px; font-weight: bold; }
-.btn-giveup { background: transparent; border: 1px solid #555; color: #aaa; width: 100%; padding: 10px; margin-top: 5px; }
-
-#logic-feedback {
-    margin-top: 15px;
-    font-size: 1rem;
-    padding: 10px;
-    background: rgba(0,0,0,0.5);
-    border-radius: 10px;
+#modal-title { font-size: 2rem; margin: 0 0 15px 0; text-transform: uppercase; }
+.title-correct { color: #28a745; text-shadow: 0 0 10px #28a745; }
+.title-wrong { color: #ff4444; text-shadow: 0 0 10px #ff4444; }
+#modal-solution { font-size: 1.2rem; color: #fff; font-weight: bold; margin-bottom: 10px; }
+#modal-explanation { font-size: 1rem; color: #ccc; line-height: 1.5; margin-bottom: 25px; font-style: italic; }
+#next-riddle-btn {
+    background: #00ffcc; color: #000; border: none; padding: 12px 25px;
+    font-size: 1.1rem; font-weight: bold; border-radius: 25px; cursor: pointer; transition: transform 0.2s;
 }
+#next-riddle-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px #00ffcc; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* =========================================
-   MEDIA QUERIES (LA MAGIA PARA MÓVIL)
+   MEDIA QUERIES (MÓVIL)
    ========================================= */
-
-/* Para móviles y tablets pequeñas (menos de 650px) */
 @media (max-width: 650px) {
-    
-    .game-container {
-        /* El contenedor ocupa todo el ancho del móvil */
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    /* TRUCO: Escalamos el rosco para que quepa */
-    .rosco-container {
-        /* Como el rosco original mide 600px, lo reducimos al 55% aprox */
-        transform: scale(0.58); 
-    }
-    
-    /* Ajustes específicos para que el Rosco se vea bien escalado */
-    .center-panel {
-        /* Como escalamos hacia abajo, el texto se hace pequeño. 
-           Aquí lo compensamos un poco si es necesario */
-        width: 320px; 
-    }
-    
-    /* El 1% no necesita escalado, se adapta por flexbox */
-    #riddle-game .logic-container {
-        justify-content: flex-start; /* Subir contenido arriba */
-        padding-top: 60px; /* Espacio para botón menú */
-    }
-
-    .logic-card {
-        padding: 15px;
-    }
-    
-    .menu-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .menu-btn {
-        width: 100%;
-        max-width: 250px;
-        flex-direction: row; /* Icono al lado del texto en móvil */
-        justify-content: center;
-        gap: 15px;
-        padding: 15px;
-    }
-    
+    .game-container { width: 100vw; height: 100vh; overflow: hidden; }
+    .rosco-container { transform: scale(0.58); }
+    .center-panel { width: 320px; }
+    #riddle-game .logic-container { justify-content: flex-start; padding-top: 60px; }
+    .logic-card { padding: 15px; }
+    .menu-buttons { flex-direction: column; align-items: center; }
+    .menu-btn { width: 100%; max-width: 250px; flex-direction: row; justify-content: center; gap: 15px; padding: 15px; }
     .icon { margin-bottom: 0; font-size: 2rem; }
-    
-    /* Ajuste para teclados móviles: evitar que tapen el input */
-    #game-screen {
-        margin-top: -20px; /* Subir un poco el juego */
-    }
+    #game-screen { margin-top: -20px; }
 }
-
-/* Pantallas MUY pequeñas (iPhone SE, etc) */
 @media (max-width: 370px) {
-    .rosco-container {
-        transform: scale(0.50); /* Reducir aún más */
-    }
+    .rosco-container { transform: scale(0.50); }
 }
