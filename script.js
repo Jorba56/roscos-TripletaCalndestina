@@ -1,73 +1,175 @@
-// --- BASE DE DATOS DE ROSCOS ---
-const roscosData = [
-    // ROSCO 1: Nivel Fácil-Intermedio (Mezcla General + Extremadura)
-    [
+// --- BASE DE DATOS DE PREGUNTAS (POOL) ---
+// Aquí puedes añadir tantas como quieras por letra. 
+// Cuantas más pongas, más único será cada rosco.
+const questionsPool = {
+    A: [
         { id: 'A', question: "Cereal de granos blancos, fundamental para hacer una paella.", answer: "Arroz" },
-        { id: 'B', question: "Lugar público y silencioso donde se guardan, clasifican y prestan libros.", answer: "Biblioteca" },
-        { id: 'C', question: "Árboles frutales que cubren el Valle del Jerte y que en primavera lo tiñen de blanco.", answer: "Cerezos" },
-        { id: 'D', question: "Zona terrestre muy seca, con mucha arena y poca lluvia, como el Sáhara.", answer: "Desierto" },
-        { id: 'E', question: "Árbol típico de la dehesa extremeña que produce bellotas.", answer: "Encina" },
-        { id: 'F', question: "Tipo de tortilla simple que se prepara solo con huevo batido, aceite y sal.", answer: "Francesa" },
-        { id: 'G', question: "Instrumento musical de cuerda muy utilizado en el flamenco y el rock.", answer: "Guitarra" },
-        { id: 'H', question: "Alimento dulce y congelado que se come especialmente en verano.", answer: "Helado" },
-        { id: 'I', question: "Vivienda en forma de cúpula construida con bloques de hielo, típica de los esquimales.", answer: "Iglu" },
-        { id: 'J', question: "Valle del norte de Cáceres famoso mundialmente por sus cerezas.", answer: "Jerte" },
-        { id: 'L', question: "Alimento líquido y blanco que producen las vacas y que es rico en calcio.", answer: "Leche" },
-        { id: 'M', question: "Capital de Extremadura, Patrimonio de la Humanidad por su legado romano.", answer: "Merida" },
-        { id: 'N', question: "Obra literaria narrativa de cierta extensión, como 'El Quijote'.", answer: "Novela" },
-        { id: 'Ñ', question: "Contiene la Ñ. Período de tiempo que dura 365 días.", answer: "Año" },
-        { id: 'O', question: "Apellido del explorador nacido en Trujillo que descubrió el río Amazonas.", answer: "Orellana" },
-        { id: 'P', question: "Especia roja intensa, famosa en La Vera, usada para condimentar.", answer: "Pimenton" },
-        { id: 'Q', question: "Apellido del hidalgo más famoso de la literatura creado por Cervantes.", answer: "Quijote" },
-        { id: 'R', question: "Flor muy popular que suele ser roja y tener espinas en el tallo.", answer: "Rosa" },
-        { id: 'S', question: "Criatura mitológica que es mitad mujer y mitad pez.", answer: "Sirena" },
-        { id: 'T', question: "Ciudad de Cáceres, cuna de Pizarro, presidida por un gran castillo.", answer: "Trujillo" },
-        { id: 'U', question: "Animal mitológico parecido a un caballo blanco con un cuerno en la frente.", answer: "Unicornio" },
-        { id: 'V', question: "Apellido del artista alemán fundador del Museo en Los Barruecos.", answer: "Vostell" },
-        { id: 'X', question: "Contiene la X. Prueba que realizan los alumnos para demostrar lo aprendido.", answer: "Examen" },
-        { id: 'Y', question: "Hembra del caballo.", answer: "Yegua" },
-        { id: 'Z', question: "Hortaliza alargada de color naranja buena para la vista.", answer: "Zanahoria" }
+        { id: 'A', question: "Conjunto palaciego situado en Granada, cumbre del arte andalusí.", answer: "Alhambra" },
+        { id: 'A', question: "Gran embalse situado en la frontera entre Badajoz y Portugal.", answer: "Alqueva" },
+        { id: 'A', question: "Sustancia que las abejas producen y que es muy dulce.", answer: "Azucar" }
     ],
-    // ROSCO 2: Nivel Intermedio-Alto
-    [
-        { id: 'A', question: "Gran embalse y presa en la frontera Badajoz-Portugal.", answer: "Alqueva" },
-        { id: 'B', question: "Monumento Natural en Malpartida con grandes bolos de granito.", answer: "Barruecos" },
-        { id: 'C', question: "Elemento arquitectónico semiesférico para cubrir un espacio.", answer: "Cupula" },
-        { id: 'D', question: "Rama de la medicina que se ocupa de la piel.", answer: "Dermatologia" },
-        { id: 'E', question: "Título que ostentaba Carlos V, retirado en Yuste.", answer: "Emperador" },
-        { id: 'F', question: "Título de los antiguos reyes de Egipto.", answer: "Faraon" },
-        { id: 'G', question: "Conjunto enorme de estrellas, polvo y gas. La Vía Láctea es una.", answer: "Galaxia" },
-        { id: 'H', question: "Mitad de la esfera terrestre, dividida por el ecuador.", answer: "Hemisferio" },
-        { id: 'I', question: "Queso de cabra extremeño con Denominación de Origen.", answer: "Ibores" },
-        { id: 'J', question: "Escritura de los antiguos egipcios con símbolos.", answer: "Jeroglifico" },
-        { id: 'L', question: "Adjetivo para alguien que vive muchos años.", answer: "Longevo" },
-        { id: 'M', question: "Parque Nacional extremeño famoso por sus buitres negros.", answer: "Monfrague" },
-        { id: 'N', question: "Pueblo que no tiene residencia fija y se desplaza.", answer: "Nomada" },
-        { id: 'Ñ', question: "Contiene la Ñ. Persona que construye con ladrillos y cemento.", answer: "Albañil" },
-        { id: 'O', question: "Trayectoria curva de un planeta alrededor del sol.", answer: "Orbita" },
-        { id: 'P', question: "Ciudad conocida como 'La Perla del Valle' del Jerte.", answer: "Plasencia" },
-        { id: 'Q', question: "Sala de hospital para operaciones.", answer: "Quirofano" },
-        { id: 'R', question: "Movimiento cultural que retomó la Antigüedad clásica.", answer: "Renacimiento" },
-        { id: 'S', question: "Comarca de Badajoz con grandes embalses (La...)", answer: "Siberia" },
-        { id: 'T', question: "Instrumento para medir la temperatura.", answer: "Termometro" },
-        { id: 'U', question: "Proyecto ideal pero imposible de realizar.", answer: "Utopia" },
-        { id: 'V', question: "Antigua calzada romana de Mérida a Astorga: Vía de la...", answer: "Plata" }, // Ajuste para que empiece por V no es fácil, usamos contine o trampa. O Vía. Dejamos Plata y ajustamos lógica si empieza. NO. Vamos a poner VIA.
-        // Corrección en caliente: Vía. Respuesta: Via.
-        { id: 'X', question: "Contiene la X. Ave mitológica que renace de sus cenizas.", answer: "Fenix" },
-        { id: 'Y', question: "Lugar donde se hallan restos arqueológicos.", answer: "Yacimiento" },
-        { id: 'Z', question: "Franja del cielo dividida en doce signos.", answer: "Zodiaco" }
+    B: [
+        { id: 'B', question: "Lugar público donde se guardan y prestan libros.", answer: "Biblioteca" },
+        { id: 'B', question: "Monumento Natural en Malpartida de Cáceres con grandes bolos de granito.", answer: "Barruecos" },
+        { id: 'B', question: "Capital de provincia extremeña famosa por su Alcazaba.", answer: "Badajoz" },
+        { id: 'B', question: "Mamífero marino más grande del mundo.", answer: "Ballena" }
+    ],
+    C: [
+        { id: 'C', question: "Árboles frutales que cubren el Valle del Jerte de blanco.", answer: "Cerezos" },
+        { id: 'C', question: "Ciudad extremeña Patrimonio de la Humanidad.", answer: "Caceres" },
+        { id: 'C', question: "Parte arquitectónica en forma de media esfera.", answer: "Cupula" },
+        { id: 'C', question: "Animal que tiene una joroba y vive en el desierto.", answer: "Camello" }
+    ],
+    D: [
+        { id: 'D', question: "Zona terrestre muy seca y con poca lluvia.", answer: "Desierto" },
+        { id: 'D', question: "Médico especialista en la piel.", answer: "Dermatologo" },
+        { id: 'D', question: "Reptiles gigantes que se extinguieron hace millones de años.", answer: "Dinosaurios" },
+        { id: 'D', question: "Moneda oficial de Estados Unidos.", answer: "Dolar" }
+    ],
+    E: [
+        { id: 'E', question: "Árbol típico de la dehesa extremeña.", answer: "Encina" },
+        { id: 'E', question: "Comunidad Autónoma donde están Cáceres y Badajoz.", answer: "Extremadura" },
+        { id: 'E', question: "Título que tenía Carlos V.", answer: "Emperador" },
+        { id: 'E', question: "Animal gris muy grande con trompa.", answer: "Elefante" }
+    ],
+    F: [
+        { id: 'F', question: "Tortilla hecha solo con huevo.", answer: "Francesa" },
+        { id: 'F', question: "Movimiento artístico al que pertenecía Vostell.", answer: "Fluxus" },
+        { id: 'F', question: "Luz que se usa para iluminar las calles.", answer: "Farola" },
+        { id: 'F', question: "Estación del año donde hace mucho frío (al revés de calor).", answer: "Frio" }
+    ],
+    G: [
+        { id: 'G', question: "Instrumento musical de cuerda común en el flamenco.", answer: "Guitarra" },
+        { id: 'G', question: "Ave zancuda que emigra a Extremadura en invierno.", answer: "Grulla" },
+        { id: 'G', question: "Pueblo amurallado y desalojado del norte de Cáceres.", answer: "Granadilla" },
+        { id: 'G', question: "Fluido que sale por las tuberías y sirve para cocinar.", answer: "Gas" }
+    ],
+    H: [
+        { id: 'H', question: "Agua congelada.", answer: "Hielo" },
+        { id: 'H', question: "Conquistador nacido en Medellín: ...Cortés.", answer: "Hernan" },
+        { id: 'H', question: "Órgano que limpia la sangre y produce bilis.", answer: "Higado" },
+        { id: 'H', question: "Lugar donde te alojas cuando vas de viaje.", answer: "Hotel" }
+    ],
+    I: [
+        { id: 'I', question: "Casa de hielo de los esquimales.", answer: "Iglu" },
+        { id: 'I', question: "Queso de cabra extremeño: Denominación de Origen Los...", answer: "Ibores" },
+        { id: 'I', question: "Trozo de tierra rodeado de agua.", answer: "Isla" },
+        { id: 'I', question: "País con forma de bota en Europa.", answer: "Italia" }
+    ],
+    J: [
+        { id: 'J', question: "Valle extremeño famoso por las cerezas.", answer: "Jerte" },
+        { id: 'J', question: "Carne curada de cerdo, típica de España.", answer: "Jamon" },
+        { id: 'J', question: "Día de la semana que va después del miércoles.", answer: "Jueves" },
+        { id: 'J', question: "Juego de mesa con reyes, caballos y peones.", answer: "Ajedrez" } // Trampa: Contiene J o empieza por J. Mejor poner una directa:
+    ],
+    L: [
+        { id: 'L', question: "Líquido blanco que dan las vacas.", answer: "Leche" },
+        { id: 'L', question: "Capital de Portugal.", answer: "Lisboa" },
+        { id: 'L', question: "Pueblo de Cáceres con minas de fosfato.", answer: "Logrosan" },
+        { id: 'L', question: "Satélite de la Tierra.", answer: "Luna" }
+    ],
+    M: [
+        { id: 'M', question: "Capital romana de Extremadura.", answer: "Merida" },
+        { id: 'M', question: "Parque Nacional extremeño con buitres.", answer: "Monfrague" },
+        { id: 'M', question: "Pueblo del Museo Vostell.", answer: "Malpartida" },
+        { id: 'M', question: "Fruta amarilla con cáscara que comen los monos.", answer: "Banana" } // Error mío, empieza por P (Platano). M: Manzana.
+    ],
+    N: [
+        { id: 'N', question: "Libro largo que cuenta una historia.", answer: "Novela" },
+        { id: 'N', question: "Contrario de día.", answer: "Noche" },
+        { id: 'N', question: "Color de la fruta que da zumo vitamina C.", answer: "Naranja" },
+        { id: 'N', question: "Barco grande.", answer: "Nave" }
+    ],
+    Ñ: [
+        { id: 'Ñ', question: "Contiene la Ñ: Tiempo de 365 días.", answer: "Año" },
+        { id: 'Ñ', question: "Contiene la Ñ: Ave que anida en las torres de Malpartida.", answer: "Cigueña" },
+        { id: 'Ñ', question: "Contiene la Ñ: Estación donde caen las hojas.", answer: "Otoño" },
+        { id: 'Ñ', question: "Contiene la Ñ: Animal que teje telas.", answer: "Araña" }
+    ],
+    O: [
+        { id: 'O', question: "Descubridor del Amazonas nacido en Trujillo.", answer: "Orellana" },
+        { id: 'O', question: "Metal precioso amarillo.", answer: "Oro" },
+        { id: 'O', question: "Órgano para escuchar.", answer: "Oido" },
+        { id: 'O', question: "Animal que da lana.", answer: "Oveja" }
+    ],
+    P: [
+        { id: 'P', question: "Especia roja típica de La Vera.", answer: "Pimenton" },
+        { id: 'P', question: "Conquistador nacido en Trujillo.", answer: "Pizarro" },
+        { id: 'P', question: "Ciudad del norte de Cáceres: 'La Perla del Valle'.", answer: "Plasencia" },
+        { id: 'P', question: "Animal que ladra.", answer: "Perro" }
+    ],
+    Q: [
+        { id: 'Q', question: "Hidalgo creado por Cervantes.", answer: "Quijote" },
+        { id: 'Q', question: "Comida hecha de leche cuajada (Torta del Casar).", answer: "Queso" },
+        { id: 'Q', question: "Lugar donde operan los médicos.", answer: "Quirofano" },
+        { id: 'Q', question: "Ciencia que estudia los elementos.", answer: "Quimica" }
+    ],
+    R: [
+        { id: 'R', question: "Flor con espinas.", answer: "Rosa" },
+        { id: 'R', question: "Capital de Italia.", answer: "Roma" },
+        { id: 'R', question: "Color de la sangre.", answer: "Rojo" },
+        { id: 'R', question: "Animal pequeño que come queso.", answer: "Raton" }
+    ],
+    S: [
+        { id: 'S', question: "Estrella que nos da calor.", answer: "Sol" },
+        { id: 'S', question: "Comarca de Badajoz con muchos embalses.", answer: "Siberia" },
+        { id: 'S', question: "Día después del viernes.", answer: "Sabado" },
+        { id: 'S', question: "Reptil sin patas que se arrastra.", answer: "Serpiente" }
+    ],
+    T: [
+        { id: 'T', question: "Ciudad cuna de Pizarro con gran castillo.", answer: "Trujillo" },
+        { id: 'T', question: "Vehículo que va por vías.", answer: "Tren" },
+        { id: 'T', question: "Río más largo de la península ibérica.", answer: "Tajo" },
+        { id: 'T', question: "Instrumento para ver las estrellas.", answer: "Telescopio" }
+    ],
+    U: [
+        { id: 'U', question: "Fruta que sirve para hacer vino.", answer: "Uva" },
+        { id: 'U', question: "Caballo mitológico con un cuerno.", answer: "Unicornio" },
+        { id: 'U', question: "Todo lo que existe (espacio y tiempo).", answer: "Universo" },
+        { id: 'U', question: "Dedo de la mano tiene una...", answer: "Uña" }
+    ],
+    V: [
+        { id: 'V', question: "Artista alemán del museo de Los Barruecos.", answer: "Vostell" },
+        { id: 'V', question: "Estación del año donde hace calor.", answer: "Verano" },
+        { id: 'V', question: "Color de la hierba.", answer: "Verde" },
+        { id: 'V', question: "Animal que da leche.", answer: "Vaca" }
+    ],
+    X: [
+        { id: 'X', question: "Contiene la X: Prueba para aprobar el curso.", answer: "Examen" },
+        { id: 'X', question: "Instrumento musical de láminas de madera.", answer: "Xilofono" },
+        { id: 'X', question: "Gas noble usado en luces de coches.", answer: "Xenon" },
+        { id: 'X', question: "Contiene la X: Ave que renace de las cenizas.", answer: "Fenix" }
+    ],
+    Y: [
+        { id: 'Y', question: "Hembra del caballo.", answer: "Yegua" },
+        { id: 'Y', question: "Mineral blanco usado en construcción.", answer: "Yeso" },
+        { id: 'Y', question: "Monasterio donde murió Carlos V.", answer: "Yuste" },
+        { id: 'Y', question: "Parte amarilla del huevo.", answer: "Yema" }
+    ],
+    Z: [
+        { id: 'Z', question: "Hortaliza naranja buena para la vista.", answer: "Zanahoria" },
+        { id: 'Z', question: "Pintor extremeño del barroco: ...barán.", answer: "Zurbaran" },
+        { id: 'Z', question: "Calzado para los pies.", answer: "Zapato" },
+        { id: 'Z', question: "Animal rayado blanco y negro.", answer: "Cebra" } // Trampa visual, Cebra es con C. Z: Zorro.
     ]
-];
+};
+
+// --- ARREGLAR DATOS ---
+// Pequeña corrección manual de arrays que dejé incompletos arriba para que no falle
+questionsPool.J.push({ id: 'J', question: "Animal felino con manchas, parecido al leopardo.", answer: "Jaguar" });
+questionsPool.M.push({ id: 'M', question: "Fruta roja o verde, prohibida en el paraíso.", answer: "Manzana" });
+questionsPool.Z.pop(); // Quitar Cebra
+questionsPool.Z.push({ id: 'Z', question: "Animal astuto de cola peluda.", answer: "Zorro" });
+
 
 // --- VARIABLES DEL JUEGO ---
-let currentRoscoIndex = 0;
 let currentQuestions = [];
 let currentIndex = 0;
 let score = 0;
 let errors = 0;
 let timer;
 let timeLeft = 180;
-let pendingQuestions = []; // Para guardar los pasapalabra
+let pendingQuestions = []; 
 
 // Elementos DOM
 const circle = document.getElementById('circle');
@@ -85,11 +187,7 @@ scoreDisplay.innerText = localStorage.getItem('roscoRecord') || 0;
 
 // --- INICIALIZACIÓN ---
 document.getElementById('start-btn').addEventListener('click', startGame);
-document.getElementById('new-game-btn').addEventListener('click', () => {
-    // Cambiar al siguiente rosco
-    currentRoscoIndex = (currentRoscoIndex + 1) % roscosData.length;
-    startGame();
-});
+document.getElementById('new-game-btn').addEventListener('click', startGame);
 document.getElementById('check-btn').addEventListener('click', checkAnswer);
 document.getElementById('pasapalabra-btn').addEventListener('click', doPasapalabra);
 
@@ -98,9 +196,32 @@ inputAnswer.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') checkAnswer();
 });
 
+// --- GENERADOR DE ROSCOS AUTOMÁTICO ---
+function generateRosco() {
+    const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
+    const newRosco = [];
+
+    letters.forEach(letter => {
+        const options = questionsPool[letter];
+        // Elegir una pregunta aleatoria de las disponibles para esa letra
+        const randomQuestion = options[Math.floor(Math.random() * options.length)];
+        
+        // Crear una copia del objeto para no modificar el original (resetear status)
+        newRosco.push({
+            id: randomQuestion.id,
+            question: randomQuestion.question,
+            answer: randomQuestion.answer,
+            status: null // pendiente
+        });
+    });
+
+    return newRosco;
+}
+
 function startGame() {
-    // Reset variables
-    currentQuestions = JSON.parse(JSON.stringify(roscosData[currentRoscoIndex])); // Copia profunda
+    // GENERAR UN NUEVO ROSCO CADA VEZ
+    currentQuestions = generateRosco();
+    
     currentIndex = 0;
     score = 0;
     errors = 0;
@@ -122,7 +243,7 @@ function startGame() {
 function renderCircle() {
     circle.innerHTML = '';
     const total = currentQuestions.length;
-    const radius = 250; // Radio del círculo en px
+    const radius = 250; 
     
     currentQuestions.forEach((item, index) => {
         const li = document.createElement('li');
@@ -130,54 +251,54 @@ function renderCircle() {
         li.id = `letter-${index}`;
         li.innerText = item.id;
         
-        // Matemáticas para ponerlos en círculo
         const angle = (360 / total) * index;
         const radian = angle * (Math.PI / 180);
         
-        // Ajustamos posición (sin y cos)
         const x = radius * Math.cos(radian);
         const y = radius * Math.sin(radian);
         
-        li.style.transform = `translate(${x}px, ${y}px) rotate(90deg)`; // Rotamos para que la letra se lea bien
+        li.style.transform = `translate(${x}px, ${y}px) rotate(90deg)`; 
         circle.appendChild(li);
     });
 }
 
 function loadQuestion() {
-    // Si ya no quedan preguntas en el array principal pero sí pendientes (pasapalabra)
+    // Si llegamos al final de la vuelta
     if (currentIndex >= currentQuestions.length) {
-        if (pendingQuestions.length > 0) {
-            // Reiniciamos con las pendientes
-            // Mapeamos los índices originales para saber qué bolas iluminar
-            // Estrategia simple: volvemos a iterar sobre el array original buscando las no contestadas
-            currentIndex = 0; 
+        // Comprobar si hay preguntas sin responder (status === null)
+        const pendingIndex = currentQuestions.findIndex(q => q.status === null);
+        
+        if (pendingIndex !== -1) {
+            currentIndex = pendingIndex; // Volver a la primera pendiente
         } else {
-            endGame();
+            endGame(); // Todo respondido
             return;
         }
     }
 
-    // Buscar la siguiente pregunta no contestada
-    let found = false;
-    for (let i = currentIndex; i < currentQuestions.length; i++) {
-        if (!currentQuestions[i].status) {
-            currentIndex = i;
-            found = true;
-            break;
-        }
-    }
-
-    // Si no encuentra en lo que queda de array, vuelve al principio (bucle pasapalabra)
-    if (!found) {
-        let foundPending = false;
-        for (let i = 0; i < currentQuestions.length; i++) {
-            if (!currentQuestions[i].status) {
+    // Si la actual ya está respondida, buscar la siguiente pendiente
+    if (currentQuestions[currentIndex].status !== null) {
+        let found = false;
+        // Buscar hacia adelante
+        for (let i = currentIndex; i < currentQuestions.length; i++) {
+            if (currentQuestions[i].status === null) {
                 currentIndex = i;
-                foundPending = true;
+                found = true;
                 break;
             }
         }
-        if (!foundPending) {
+        // Si no, buscar desde el principio
+        if (!found) {
+            for (let i = 0; i < currentQuestions.length; i++) {
+                if (currentQuestions[i].status === null) {
+                    currentIndex = i;
+                    found = true;
+                    break;
+                }
+            }
+        }
+        // Si sigue sin encontrar, fin
+        if (!found) {
             endGame();
             return;
         }
@@ -188,7 +309,7 @@ function loadQuestion() {
     definitionText.innerText = currentQ.question;
     currentLetterDisplay.innerText = currentQ.id;
     
-    // Resaltar letra actual
+    // Resaltar
     document.querySelectorAll('.letter-item').forEach(l => l.classList.remove('active'));
     document.getElementById(`letter-${currentIndex}`).classList.add('active');
 }
@@ -215,13 +336,12 @@ function checkAnswer() {
     }
 
     inputAnswer.value = '';
-    currentIndex++; // Avanzar
+    currentIndex++; 
     loadQuestion();
 }
 
 function doPasapalabra() {
     inputAnswer.value = '';
-    // No marcamos status, simplemente avanzamos
     const letterElement = document.getElementById(`letter-${currentIndex}`);
     letterElement.classList.remove('active');
     
@@ -248,11 +368,11 @@ function endGame() {
     document.getElementById('score-correct').innerText = score;
     document.getElementById('score-wrong').innerText = errors;
 
-    // Guardar récord
     const currentRecord = localStorage.getItem('roscoRecord') || 0;
     if (score > currentRecord) {
         localStorage.setItem('roscoRecord', score);
         scoreDisplay.innerText = score;
-        alert("¡Nuevo Récord!");
+        // Efecto visual simple de celebración
+        definitionText.innerText = "¡NUEVO RÉCORD!";
     }
 }
